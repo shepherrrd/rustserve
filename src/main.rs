@@ -20,13 +20,13 @@ fn handle_connection(mut stream: TcpStream, router: &Router) {
 fn main() {
     let mut router = Router::new();
     router.add_route("/hello/v1".to_string(), "HTTP/1.1 200 OK\r\n\r\nHello, V1!".to_string());
-
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+    let port : i32 = 8090;
+    let listener = TcpListener::bind(format!("0.0.0.0:{}",port)).unwrap();
     for stream in listener.incoming() {
         let stream = stream.unwrap();
         handle_connection(stream, &router);
     }
 }
 fn sample(){
-    
+
 }
